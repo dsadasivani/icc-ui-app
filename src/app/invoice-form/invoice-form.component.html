@@ -1,0 +1,366 @@
+<body class="bg-light">
+    <div class="container">
+  <div class="py-5 text-left">
+    <h2>Book New Order</h2>
+    <p class="lead">Please enter order information here in order to generate invoice.</p>
+    <hr class="mb-4">
+  </div>
+
+  <div class="row">
+    
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Consignee address details</h4>
+      <form [formGroup]="addOrder" (ngSubmit)="createOrder()">
+        
+          <div class="mb-3">
+            <label for="companyName">Company name</label>
+            <input type="text" class="form-control" formControlName="companyName" placeholder="Consignee company name">
+            <span class="text-danger" *ngIf="(orderFormControl.companyName.touched || submitted) && orderFormControl.companyName.errors?.required">
+                Company name is required
+            </span>
+          </div>
+        <div class="mb-3">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" formControlName="address" placeholder="Street Name, State...">
+          <span class="text-danger" *ngIf="(orderFormControl.address.touched || submitted) && orderFormControl.address.errors?.required">
+            Address is required
+        </span>
+        </div>
+
+        <div class="mb-3">
+          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+          <input type="text" class="form-control" formControlName="address2" placeholder="District, Landmark...">
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="gstin">GSTIN Number</label>
+              <input type="text" class="form-control" formControlName="gstin" placeholder="">
+              <small class="text-muted"><span data-feather="info"></span>Legal GSTIN to be provided</small><br>
+              <span class="text-danger" *ngIf="(orderFormControl.gstin.touched || submitted) && orderFormControl.gstin.errors?.required">
+                GSTIN number is required
+            </span>
+            <span class="text-danger" *ngIf="orderFormControl.gstin.touched && orderFormControl.gstin.errors?.invalidGstin">
+                GSTIN number should not contain special characters
+            </span>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="phoneNumber">Phone Number</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">+91-</span>
+                </div>
+              <input type="text" class="form-control" formControlName="phoneNumber" placeholder="">
+            </div>
+              <span class="text-danger" *ngIf="(orderFormControl.phoneNumber.touched || submitted) && orderFormControl.phoneNumber.errors?.required">
+                Phone number is required
+            </span>
+            <span class="text-danger" *ngIf="(orderFormControl.phoneNumber.touched && orderFormControl.phoneNumber.errors?.invalidNumber) ||
+                                             (orderFormControl.phoneNumber.dirty && orderFormControl.phoneNumber.errors?.invalidNumber)">
+                Only numerics are allowed
+            </span>
+            <br>
+            <span class="text-danger" *ngIf="(orderFormControl.phoneNumber.touched && orderFormControl.phoneNumber.errors?.minlength && !orderFormControl.phoneNumber.errors?.invalidNumber) ||
+                                             (orderFormControl.phoneNumber.dirty && orderFormControl.phoneNumber.errors?.minlength && !orderFormControl.phoneNumber.errors?.invalidNumber)">
+                Should be atleast {{orderFormControl.phoneNumber.errors?.minlength.requiredLength}} digits. But found {{orderFormControl.phoneNumber.errors?.minlength.actualLength}}
+            </span>
+            
+            </div>
+          </div>
+        <hr class="mb-4">
+        <h4 class="mb-3">Order Details</h4>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="salesPersonName">Sales Person Name</label>
+            <input type="text" class="form-control" formControlName="salesPersonName" placeholder="">
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="transport">Sent Via</label>
+            <select class="form-control custom-select d-block w-100" formControlName="transport">
+              <option value="">Choose...</option>
+              <option>ARC</option>
+              <option>Kranti</option>
+              <option>Navata</option>
+              <option>BMPS</option>
+              <option>Kesineni</option>
+              <option>OTHERS</option>
+            </select>
+            <span class="text-danger" *ngIf="(orderFormControl.transport.touched || submitted) && orderFormControl.transport.errors?.required">
+                Please select one provider
+            </span>
+          </div>
+          <div class="col-md-5 mb-3">
+            <label for="otherTransport">Other Logistic Service</label>
+            <input type="text" class="form-control" formControlName="otherTransport" placeholder="Type Here...">
+            <span class="text-danger" *ngIf="(orderFormControl.otherTransport.touched || submitted) && orderFormControl.otherTransport.errors?.required">
+                Logistic service name is required
+            </span>
+          </div>
+        </div>
+        <div class="mb-3">
+            <label for="fobPoint">FOB Point<span class="text-muted">(Free on board)</span></label>
+            <input type="text" class="form-control" formControlName="fobPoint" placeholder="">
+            <small class="text-muted"><span data-feather="info"></span>Free On Board is a term used to indicate who is liable for goods damaged or destroyed during shipping</small><br>
+          </div>
+        <div class="row">
+          <div class="col-md-4 mb-2">
+            <label for="terms">Monetary Terms</label>
+            <select class="form-control custom-select d-block w-100" formControlName="terms">
+              <option value="">Choose...</option>
+              <option>Cash</option>
+              <option>Credit</option>
+            </select>
+            <span class="text-danger" *ngIf="(orderFormControl.terms.touched || submitted) && orderFormControl.terms.errors?.required">
+                Monetary Terms is required
+            </span>
+          </div>
+          <div class="col-md-4 mb-2">
+            <label for="dueDate">Due Date</label>
+            <select class="form-control custom-select d-block w-100" formControlName="dueDate">
+              <option value="">Choose...</option>
+              <option>7 Days</option>
+              <option>15 Days</option>
+              <option>30 Days</option>
+            </select>
+            <span class="text-danger" *ngIf="(orderFormControl.dueDate.touched || submitted) && orderFormControl.dueDate.errors?.required">
+                Due date is required
+            </span>
+          </div>
+        </div>
+        <div class="mb-3">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Unit Price</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                  <tr formGroupName="product1">
+                    <td>
+                        <input type="checkbox" data-toggle="collapse" aria-expanded="false" data-target="#prd1" class="form-control custom-control-input" formControlName="productName" id="productName1">
+                        <label class="custom-control-label" for="productName1">LEAKSEAL - 1 Ltr x 20 Btls</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts">
+                        <span class="text-danger" *ngIf="(productFormControl('product1').quantity.touched || submitted) && productFormControl('product1').quantity.errors?.required">
+                            Please Mention Quantity
+                        </span>
+                        <span class="text-danger" *ngIf="(productFormControl('product1').quantity.touched && productFormControl('product1').quantity.errors?.invalidNumber) ||
+                                                         (productFormControl('product1').quantity.dirty && productFormControl('product1').quantity.errors?.invalidNumber)">
+                            Only numerics are allowed
+                        </span>
+                        <br>   
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="">   
+                        <span class="text-danger" *ngIf="(productFormControl('product1').unitPrice.touched || submitted) && productFormControl('product1').unitPrice.errors?.required">
+                            Please Mention price per carton
+                        </span>
+                        <span class="text-danger" *ngIf="(productFormControl('product1').unitPrice.touched && productFormControl('product1').unitPrice.errors?.invalidNumber) ||
+                                                         (productFormControl('product1').unitPrice.dirty && productFormControl('product1').unitPrice.errors?.invalidNumber)">
+                            Only numerics are allowed
+                        </span>
+                        <br>
+                    </td>
+                  </tr>
+                  <tr formGroupName="product2">
+                    <td>
+                        <input type="checkbox" data-toggle="collapse" data-target="#prd2" class="form-control custom-control-input" formControlName="productName" id="productName2">
+                        <label class="custom-control-label" for="productName2">LEAKSEAL - 5 Ltr x 4 Jars</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts"> 
+                        <span class="text-danger" *ngIf="(productFormControl('product2').quantity.touched || submitted) && productFormControl('product2').quantity.errors?.required">
+                            Please Mention Quantity
+                        </span>
+                        <span class="text-danger" *ngIf="(productFormControl('product2').quantity.touched && productFormControl('product2').quantity.errors?.invalidNumber) ||
+                                                         (productFormControl('product2').quantity.dirty && productFormControl('product2').quantity.errors?.invalidNumber)">
+                            Only numerics are allowed
+                        </span>
+                        <br> 
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="">   
+                        <span class="text-danger" *ngIf="(productFormControl('product2').unitPrice.touched || submitted) && productFormControl('product2').unitPrice.errors?.required">
+                            Please Mention price per carton
+                        </span>
+                        <span class="text-danger" *ngIf="(productFormControl('product2').unitPrice.touched && productFormControl('product2').unitPrice.errors?.invalidNumber) ||
+                                                         (productFormControl('product2').unitPrice.dirty && productFormControl('product2').unitPrice.errors?.invalidNumber)">
+                            Only numerics are allowed
+                        </span>
+                        <br>
+                    </td>
+                  </tr>
+                  <tr formGroupName="product3">
+                    <td>
+                        <input type="checkbox" data-toggle="collapse" data-target="#prd3" class=" form-control custom-control-input" formControlName="productName" id="productName3">
+                        <label class="custom-control-label" for="productName3">LEAKSEAL - 100 Ml x 100 Pouches</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts"> 
+                        <span class="text-danger" *ngIf="(productFormControl('product3').quantity.touched || submitted) && productFormControl('product3').quantity.errors?.required">
+                            Please Mention Quantity
+                        </span>
+                        <span class="text-danger" *ngIf="(productFormControl('product3').quantity.touched && productFormControl('product3').quantity.errors?.invalidNumber) ||
+                                                         (productFormControl('product3').quantity.dirty && productFormControl('product3').quantity.errors?.invalidNumber)">
+                            Only numerics are allowed
+                        </span>
+                        <br> 
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="">
+                        <span class="text-danger" *ngIf="(productFormControl('product3').unitPrice.touched || submitted) && productFormControl('product3').unitPrice.errors?.required">
+                            Please Mention price per carton
+                        </span>
+                        <span class="text-danger" *ngIf="(productFormControl('product3').unitPrice.touched && productFormControl('product3').unitPrice.errors?.invalidNumber) ||
+                                                         (productFormControl('product3').unitPrice.dirty && productFormControl('product3').unitPrice.errors?.invalidNumber)">
+                            Only numerics are allowed
+                        </span>
+                        <br>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        <hr class="mb-4">
+        
+        <div class="mb-2">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                      <th scope="col"style="width: 25%">Discount</th>
+                      <th scope="col" style="width: 16.66%">Percentage<span class="text-muted">(%)</span></th>
+                      <th scope="col">Order Scope</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                    <td>
+                        <input type="checkbox" data-toggle="collapse" data-target="#td" class="form-control custom-control-input" formControlName="tradeDiscount" id="tradeDiscount">
+                        <label class="custom-control-label" for="tradeDiscount">Trade Discount</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="tradeDiscountValue" placeholder="">   
+                        <span class="text-danger" *ngIf="(orderFormControl.tradeDiscountValue.touched || submitted) && orderFormControl.tradeDiscountValue.errors?.required">
+                            Disable trade discount checkbox if not needed.
+                        </span>
+                        <span class="text-danger" *ngIf="(orderFormControl.tradeDiscountValue.touched && orderFormControl.tradeDiscountValue.errors?.invalidNumber) ||
+                                                         (orderFormControl.tradeDiscountValue.dirty && orderFormControl.tradeDiscountValue.errors?.invalidNumber)">
+                            Only numerics are allowed
+                        </span>
+                        
+                    </td> 
+                    <td rowspan="2">
+                        <select class="form-control custom-select d-block w-100" formControlName="orderScope">
+                            <option value="">Choose...</option>
+                            <option value="state">Within State(CGST + SGST)</option>
+                            <option value="interState">Inter-State(IGST)</option>
+                        </select>
+                        <span class="text-danger" *ngIf="(orderFormControl.orderScope.touched || submitted) && orderFormControl.orderScope.errors?.required">
+                            Order scope is required
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" data-toggle="collapse" data-target="#cd" class="form-control custom-control-input" formControlName="cashDiscount" id="cashDiscount">
+                        <label class="custom-control-label" for="cashDiscount">Cash Discount</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="cashDiscountValue" placeholder="">  
+                        <span class="text-danger" *ngIf="(orderFormControl.cashDiscountValue.touched || submitted) && orderFormControl.cashDiscountValue.errors?.required">
+                            Disable trade discount checkbox if not needed.
+                        </span>
+                        <span class="text-danger" *ngIf="(orderFormControl.cashDiscountValue.touched && orderFormControl.cashDiscountValue.errors?.invalidNumber) ||
+                                                         (orderFormControl.cashDiscountValue.dirty && orderFormControl.cashDiscountValue.errors?.invalidNumber)">
+                            Only numerics are allowed
+                        </span>
+                         
+                    </td> 
+                </tr>
+
+                  </tbody>
+            </table>
+        </div>
+        
+    
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit"><span style="size: 32px;" data-feather="save"></span>Save Order Details</button>
+        &nbsp;
+        &nbsp;
+      </form>
+    </div>
+    <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Price Calculation</span>
+          <span class="badge badge-secondary badge-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed" [style.padding]="PaddingProd1" id="prd1" >
+            <div id="prd1" [class]="onLoadHideProd1">
+              <h6 class="my-0">LEAKSEAL - 1 ltr </h6>
+              <small class="text-muted">20 cartons with unit price - 2600/-</small>
+            </div>
+            <div id="prd1" [class]="onLoadHideProd1">
+            <span class="text-muted" >₹52,000</span>
+        </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed" [style.padding]="PaddingProd2" id="prd2" >
+            <div id="prd2" [class]="onLoadHideProd2">
+              <h6 class="my-0">LEAKSEAL - 5 ltr </h6>
+              <small class="text-muted">10 cartons with unit price - 2550/-</small>
+            </div>
+            <div id="prd2" [class]="onLoadHideProd2">
+                <span class="text-muted">₹25,500</span>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed" [style.padding]="PaddingProd3" id="prd3" >
+            <div id="prd3" [class]="onLoadHideProd3">
+              <h6 class="my-0">LEAKSEAL - 100 ml  </h6>
+              <small class="text-muted">15 cartons with unit price - 2700/-</small>
+            </div>
+            <div id="prd3" [class]="onLoadHideProd3">
+                <span class="text-muted">₹40,500</span>
+            </div>
+          </li>
+          
+          <li class="list-group-item d-flex justify-content-between bg-light" [style.padding]="PaddingTd" id="td">
+            <div class="text-success" [class]="onLoadHideTd"  id="td">
+              <h6 class="my-0">Discount</h6>
+              <small>Trade Discount 15%</small>
+            </div>
+            <div id="td" [class]="onLoadHideTd">
+                <span class="text-success">-₹27,690</span>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light" [style.padding]="PaddingCd" id="cd">
+            <div class="text-success" [class]="onLoadHideCd" id="cd">
+              <h6 class="my-0">Discount</h6>
+              <small>Cash Discount 7%</small>
+            </div>
+            <div id="cd" [class]="onLoadHideCd">
+                <span class="text-success">-₹10,983</span>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light" [style.padding]="PaddingGst">
+            <div class="text-danger" [class]="onLoadHideGst" id="orderScope">
+              <h6 class="my-0">GST</h6>
+              <small>IGST 18%</small>
+            </div>
+            <div id="orderScope" [class]="onLoadHideGst">
+                <span class="text-danger">₹26,266</span>
+            </div>        
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (INR)</span>
+            <strong>₹1,72,193</strong>
+          </li>
+        </ul>
+      </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+        <script src="form-validation.js"></script></body>
