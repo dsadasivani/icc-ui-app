@@ -50,6 +50,7 @@
     padding-top: .5rem;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: lavender;
   }
   
   @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -60,8 +61,13 @@
   }
   
   .sidebar .nav-link {
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
     color: #333;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.3rem;
   }
   
   .sidebar .nav-link .feather {
@@ -98,6 +104,9 @@
   .navbar .navbar-toggler {
     top: .25rem;
     right: 1rem;
+    padding: .75rem 1rem;
+    border-width: 3px;
+    border-radius: 0;
   }
   
   .navbar .form-control {
@@ -120,4 +129,14 @@
     .px-md-4 {
     padding-left: 0rem !important;
     padding-right: 0rem !important;
+}
+
+.p-0 {
+    padding-top: 2px !important;
+    padding-right: 2px !important;
+    padding-bottom: 2px !important;
+    padding-left: 2px !important;
+}
+.px-3 {
+    padding-left: 0.5rem !important;
 }
