@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
@@ -8,7 +9,7 @@ const routes: Routes = [
   {component: InvoiceFormComponent, path: 'add-invoice'},
   {component: DashboardComponent, path: 'dashboard'},
   {component: ProductsComponent, path: 'products'},
-  {component: DashboardComponent, path: '**'}
+  {component: HomeComponent, path: '**'}
 ];
 
 @NgModule({

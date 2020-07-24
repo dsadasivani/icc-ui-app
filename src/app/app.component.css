@@ -50,7 +50,7 @@
     padding-top: .5rem;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: lavender;
+    background-color: #e9ecef;
   }
   
   @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -148,4 +148,7 @@
 }
 .mr-0, .mx-0 {
     margin-right: 6rem !important;
+}
+.pt-3, .py-3 {
+    padding-top: 2rem !important;
 }
