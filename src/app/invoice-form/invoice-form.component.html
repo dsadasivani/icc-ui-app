@@ -301,47 +301,47 @@
           <li class="list-group-item d-flex justify-content-between lh-condensed" [style.padding]="PaddingProd1" id="prd1" >
             <div id="prd1" [class]="onLoadHideProd1">
               <h6 class="my-0">LEAKSEAL - 1 ltr </h6>
-              <small class="text-muted">20 cartons with unit price - 2600/-</small>
+              <small class="text-muted">{{prod1Quantity}} cartons with unit price - {{prod1UnitPrice | currency:'INR':'symbol' : '1.0-0'}}</small>
             </div>
             <div id="prd1" [class]="onLoadHideProd1">
-            <span class="text-muted" >₹52,000</span>
+            <span class="text-muted" >{{prod1Quantity*prod1UnitPrice | currency:'INR':'symbol' : '1.0-0'}}</span>
         </div>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-condensed" [style.padding]="PaddingProd2" id="prd2" >
             <div id="prd2" [class]="onLoadHideProd2">
               <h6 class="my-0">LEAKSEAL - 5 ltr </h6>
-              <small class="text-muted">10 cartons with unit price - 2550/-</small>
+              <small class="text-muted">{{prod2Quantity}} cartons with unit price - {{prod2UnitPrice | currency:'INR':'symbol' : '1.0-0'}}</small>
             </div>
             <div id="prd2" [class]="onLoadHideProd2">
-                <span class="text-muted">₹25,500</span>
+                <span class="text-muted">{{prod2Quantity*prod2UnitPrice | currency:'INR':'symbol' : '1.0-0'}}</span>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-condensed" [style.padding]="PaddingProd3" id="prd3" >
             <div id="prd3" [class]="onLoadHideProd3">
               <h6 class="my-0">LEAKSEAL - 100 ml  </h6>
-              <small class="text-muted">15 cartons with unit price - 2700/-</small>
+              <small class="text-muted">{{prod3Quantity}} cartons with unit price - {{prod3UnitPrice | currency:'INR':'symbol' : '1.0-0'}}</small>
             </div>
             <div id="prd3" [class]="onLoadHideProd3">
-                <span class="text-muted">₹40,500</span>
+                <span class="text-muted">{{prod3Quantity*prod3UnitPrice | currency:'INR':'symbol' : '1.0-0'}}</span>
             </div>
           </li>
           
           <li class="list-group-item d-flex justify-content-between bg-light" [style.padding]="PaddingTd" id="td">
             <div class="text-success" [class]="onLoadHideTd"  id="td">
               <h6 class="my-0">Discount</h6>
-              <small>Trade Discount 15%</small>
+              <small>Trade Discount {{tradeDiscount}}%</small>
             </div>
             <div id="td" [class]="onLoadHideTd">
-                <span class="text-success">-₹27,690</span>
+                <span class="text-success">-{{getTradeDiscountAmt() | currency:'INR':'symbol' : '1.0-0'}}</span>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between bg-light" [style.padding]="PaddingCd" id="cd">
             <div class="text-success" [class]="onLoadHideCd" id="cd">
               <h6 class="my-0">Discount</h6>
-              <small>Cash Discount 7%</small>
+              <small>Cash Discount {{cashDiscount}}%</small>
             </div>
             <div id="cd" [class]="onLoadHideCd">
-                <span class="text-success">-₹10,983</span>
+                <span class="text-success">-{{getCashDiscountAmt() | currency:'INR':'symbol' : '1.0-0'}}</span>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between bg-light" [style.padding]="PaddingGst">
@@ -350,12 +350,12 @@
               <small>IGST 18%</small>
             </div>
             <div id="orderScope" [class]="onLoadHideGst">
-                <span class="text-danger">₹26,266</span>
+                <span class="text-danger">{{getGstAmt() | currency:'INR':'symbol' : '1.0-0'}}</span>
             </div>        
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>Total (INR)</span>
-            <strong>₹1,72,193</strong>
+            <strong>{{getCalculatedTotal() | currency:'INR'}}</strong>
           </li>
         </ul>
       </div>

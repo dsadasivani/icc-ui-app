@@ -156,8 +156,8 @@ handleOtherTransport(sourceControl: string, targetControl: string) {
         this.PaddingCd = '0.75rem 1.25rem';
       }
     else{
-      this.PaddingCd = '0px';
-      this.PaddingTd = '0px';
+      if(sourceControl == 'cashDiscount' && !selectedValue) this.PaddingCd = '0px';
+      if(sourceControl == 'tradeDiscount' && !selectedValue) this.PaddingTd = '0px';
       this.addOrder.get(targetControl).disable();
       this.addOrder.get(targetControl).reset();
     }
@@ -175,4 +175,62 @@ handleOrderScope(){
     }
   });
 }
+
+get prod1Quantity() {
+  let value = this.addOrder.get('product1.quantity').value
+  return (value == undefined) ? 0 : value
+}
+get prod1UnitPrice() {
+ let value = this.addOrder.get('product1.unitPrice').value
+ return (value == undefined) ? 0 : value
+}
+get prod2Quantity() {
+  let value = this.addOrder.get('product2.quantity').value
+  return (value == undefined) ? 0 : value
+}
+get prod2UnitPrice() {
+ let value = this.addOrder.get('product2.unitPrice').value
+ return (value == undefined) ? 0 : value
+}
+get prod3Quantity() {
+  let value = this.addOrder.get('product3.quantity').value
+  return (value == undefined) ? 0 : value
+}
+get prod3UnitPrice() {
+ let value = this.addOrder.get('product3.unitPrice').value
+ return (value == undefined) ? 0 : value
+}
+
+get tradeDiscount() {
+  let value = this.addOrder.get('tradeDiscountValue').value
+  return (value == undefined) ? 0 : value
+ }
+
+ get cashDiscount() {
+  let value = this.addOrder.get('cashDiscountValue').value
+  return (value == undefined) ? 0 : value
+ }
+
+getTotalValue():number {
+  return ((this.prod1Quantity * this.prod1UnitPrice) + 
+          (this.prod2Quantity * this.prod2UnitPrice) + 
+          (this.prod3Quantity * this.prod3UnitPrice))
+}
+
+getTradeDiscountAmt():number {
+  return this.getTotalValue() * this.tradeDiscount/100;
+}
+
+getCashDiscountAmt():number {
+  return (this.getTotalValue() - this.getTradeDiscountAmt()) * this.cashDiscount/100;
+}
+
+getGstAmt():number {
+  return (this.getTotalValue() - this.getTradeDiscountAmt() - this.getCashDiscountAmt()) * 18/100;
+}
+
+getCalculatedTotal():number {
+  return (this.getTotalValue() - this.getTradeDiscountAmt() - this.getCashDiscountAmt() + this.getGstAmt());
+}
+
 }
