@@ -10,5 +10,10 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     Feather.replace();
   }
-  title = 'icc-ui-app';
+  onSelectCollapse:String = '';
+  areaExpanded:String;
+  onSelect() {
+    this.onSelectCollapse = 'collapsed';
+    this.areaExpanded = 'false';
+  }
 }

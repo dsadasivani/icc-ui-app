@@ -14,6 +14,8 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
     Feather.replace();
   }
 
+  constructor(private customValidator: CustomValidationService) { }
+
   submitted: boolean = false;
   PaddingProd1: String = '';
   PaddingProd2: String = '';
@@ -30,7 +32,8 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   onLoadHideCd: String = 'collapse';
   onLoadHideGst: String = 'collapse';
   
-  constructor(private customValidator: CustomValidationService) { }
+  productList: number = 0;
+  
 
   ngOnInit(): void {
    
@@ -114,21 +117,24 @@ onCheckBoxChangeDisableField(list: any[]) {
   this.addOrder.get(value+'.productName').valueChanges
   .subscribe(selectedCountry => {
       if (!selectedCountry) {
-        if(value == "product1") this.onLoadHideProd1 = 'unset';
-        if(value == "product2") this.onLoadHideProd2 = 'unset';
-        if(value == "product3") this.onLoadHideProd3 = 'unset';
+        if(value == "product1") {this.onLoadHideProd1 = 'unset'
+                                 this.PaddingProd1 = '0px'
+                                 this.productList--}
+        if(value == "product2") {this.onLoadHideProd2 = 'unset'
+                                 this.PaddingProd2 = '0px'
+                                 this.productList--}
+        if(value == "product3") {this.onLoadHideProd3 = 'unset'
+                                 this.PaddingProd3 = '0px' 
+                                 this.productList--}
           this.addOrder.get(value+'.quantity').disable();
           this.addOrder.get(value+'.quantity').reset(); 
           this.addOrder.get(value+'.unitPrice').disable();
           this.addOrder.get(value+'.unitPrice').reset();
-          if(value == "product1") this.PaddingProd1 = '0px';
-          if(value == "product2") this.PaddingProd2 = '0px';
-          if(value == "product3") this.PaddingProd3 = '0px';
       }
       else {
-        if(value == "product1") this.PaddingProd1 = '0.75rem 1.25rem';
-        if(value == "product2") this.PaddingProd2 = '0.75rem 1.25rem';
-        if(value == "product3") this.PaddingProd3 = '0.75rem 1.25rem';
+        if(value == "product1") {this.PaddingProd1 = '0.75rem 1.25rem';this.productList++}
+        if(value == "product2") {this.PaddingProd2 = '0.75rem 1.25rem';this.productList++}
+        if(value == "product3") {this.PaddingProd3 = '0.75rem 1.25rem';this.productList++}
         this.addOrder.get(value+'.quantity').enable();
         this.addOrder.get(value+'.unitPrice').enable();
       }
