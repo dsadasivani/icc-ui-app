@@ -10,10 +10,4 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     Feather.replace();
   }
-  onSelectCollapse:String = '';
-  areaExpanded:String;
-  onSelect() {
-    this.onSelectCollapse = 'collapsed';
-    this.areaExpanded = 'false';
-  }
 }
