@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { CustomValidationService } from '../services/custom-validation.service';
+import { InvoiceFormService } from '../services/invoice-form.service';
 import * as Feather from 'feather-icons';
 
 @Component({
@@ -10,11 +11,15 @@ import * as Feather from 'feather-icons';
 })
 export class InvoiceFormComponent implements OnInit, AfterViewInit {
 
+  alert:boolean = false;
+  connectionAlert:boolean = false;
+  loadingAlert:boolean = false;
+
   ngAfterViewInit(): void {
     Feather.replace();
   }
 
-  constructor(private customValidator: CustomValidationService) { }
+  constructor(private customValidator: CustomValidationService, private invoiceService: InvoiceFormService) { }
 
   submitted: boolean = false;
   PaddingProd1: String = '';
@@ -50,17 +55,17 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
       terms: new FormControl('',Validators.required),
       dueDate: new FormControl('', Validators.required),
       product1: new FormGroup({
-        productName: new FormControl(''),
+        productSelected: new FormControl(false),
         quantity: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()])),
         unitPrice: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()]))
       }),
       product2: new FormGroup({
-        productName: new FormControl(''),
+        productSelected: new FormControl(false),
         quantity: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()])),
         unitPrice: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()]))
       }),
       product3: new FormGroup({
-        productName: new FormControl(''),
+        productSelected: new FormControl(false),
         quantity: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()])),
         unitPrice: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()]))
       }),
@@ -88,13 +93,26 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   }
 
   createOrder(){
+    this.loadingAlert = true;
     // prdt1: FormGroup;
     // this.prdt1 =  this.addOrder..
     // console.log(this.addOrder.get('product1')['controls']);
     this.submitted = true;
     if(this.addOrder.valid){
-      console.log(this.addOrder.value);
-      this.addOrder.reset();
+      // console.log(this.addOrder.value);
+      this.invoiceService.addOrderDetails(this.addOrder.value).subscribe((result => {
+        this.addOrder.reset();
+        console.log('Data persisted on server', result);
+        this.alert = true;
+        this.loadingAlert = false;
+      }),
+      (error => { 
+        console.log('Error occured while connecting to DB.', error);
+        this.connectionAlert = true;
+        this.loadingAlert = false;
+      })
+      );
+      
       this.submitted = false;
     }
   }
@@ -114,9 +132,9 @@ onCheckBoxChangeDisableField(list: any[]) {
   this.PaddingProd3 = '0px';
   // this.onLoadHide = 'unset';
   for(let value of list){
-  this.addOrder.get(value+'.productName').valueChanges
-  .subscribe(selectedCountry => {
-      if (!selectedCountry) {
+  this.addOrder.get(value+'.productSelected').valueChanges
+  .subscribe(selectedProduct => {
+      if (!selectedProduct) {
         if(value == "product1") {this.onLoadHideProd1 = 'unset'
                                  this.PaddingProd1 = '0px'
                                  this.productList--}
@@ -237,6 +255,10 @@ getGstAmt():number {
 
 getCalculatedTotal():number {
   return (this.getTotalValue() - this.getTradeDiscountAmt() - this.getCashDiscountAmt() + this.getGstAmt());
+}
+
+closeAlert(value){
+  value = false;
 }
 
 }

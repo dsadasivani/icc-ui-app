@@ -6,6 +6,28 @@
     <hr class="mb-4">
   </div>
 
+  <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> data added successfully..
+    <button (click)="closeAlert(alert)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div *ngIf="connectionAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>ERROR!</strong> unable to connect to database..
+    <button (click)="closeAlert(connectionAlert)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div *ngIf="loadingAlert">
+    <div  class="spinner-border spinner-border-sm" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div  class="spinner-grow spinner-grow-sm" role="status">
+        <span class="sr-only">Loading...</span>
+      </div> 
+      &nbsp; <strong>Connecting to daatabase.. </strong>
+  </div>
+
   <div class="row">
     
     <div class="col-md-8 order-md-1">
@@ -118,9 +140,9 @@
             <label for="dueDate">Due Date</label>
             <select class="form-control custom-select d-block w-100" formControlName="dueDate">
               <option value="">Choose...</option>
-              <option>7 Days</option>
-              <option>15 Days</option>
-              <option>30 Days</option>
+              <option value="7">7 Days</option>
+              <option value="15">15 Days</option>
+              <option value="30">30 Days</option>
             </select>
             <span class="text-danger" *ngIf="(orderFormControl.dueDate.touched || submitted) && orderFormControl.dueDate.errors?.required">
                 Due date is required
@@ -139,7 +161,7 @@
                 <tbody>
                   <tr formGroupName="product1">
                     <td>
-                        <input type="checkbox" data-toggle="collapse" aria-expanded="false" data-target="#prd1" class="form-control custom-control-input" formControlName="productName" id="productName1">
+                        <input type="checkbox" data-toggle="collapse" aria-expanded="false" data-target="#prd1" class="form-control custom-control-input" formControlName="productSelected" id="productName1">
                         <label class="custom-control-label" for="productName1">LEAKSEAL - 1 Ltr x 20 Btls</label>
                     </td>
                     <td>
@@ -167,7 +189,7 @@
                   </tr>
                   <tr formGroupName="product2">
                     <td>
-                        <input type="checkbox" data-toggle="collapse" data-target="#prd2" class="form-control custom-control-input" formControlName="productName" id="productName2">
+                        <input type="checkbox" data-toggle="collapse" data-target="#prd2" class="form-control custom-control-input" formControlName="productSelected" id="productName2">
                         <label class="custom-control-label" for="productName2">LEAKSEAL - 5 Ltr x 4 Jars</label>
                     </td>
                     <td>
@@ -195,7 +217,7 @@
                   </tr>
                   <tr formGroupName="product3">
                     <td>
-                        <input type="checkbox" data-toggle="collapse" data-target="#prd3" class=" form-control custom-control-input" formControlName="productName" id="productName3">
+                        <input type="checkbox" data-toggle="collapse" data-target="#prd3" class=" form-control custom-control-input" formControlName="productSelected" id="productName3">
                         <label class="custom-control-label" for="productName3">LEAKSEAL - 100 Ml x 100 Pouches</label>
                     </td>
                     <td>

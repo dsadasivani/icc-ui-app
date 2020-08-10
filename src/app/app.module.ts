@@ -9,6 +9,7 @@ import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomeComponent } from './home/home.component';
     InvoiceFormComponent,
     DashboardComponent,
     ProductsComponent,
-    HomeComponent
+    HomeComponent,
+    ScrollToTopComponent
   ],
   imports: [
     BrowserModule,
