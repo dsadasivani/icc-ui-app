@@ -30,12 +30,12 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   PaddingGst: String = '';
 
   addOrder:FormGroup;
-  onLoadHideProd1: String = 'collapse';
-  onLoadHideProd2: String = 'collapse';
-  onLoadHideProd3: String = 'collapse';
-  onLoadHideTd: String = 'collapse';
-  onLoadHideCd: String = 'collapse';
-  onLoadHideGst: String = 'collapse';
+  onLoadHideProd1: String = 'collapse multi-collapse';
+  onLoadHideProd2: String = 'collapse multi-collapse';
+  onLoadHideProd3: String = 'collapse multi-collapse';
+  onLoadHideTd: String = 'collapse multi-collapse';
+  onLoadHideCd: String = 'collapse multi-collapse';
+  onLoadHideGst: String = 'collapse multi-collapse';
   
   productList: number = 0;
   
@@ -75,13 +75,33 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
       cashDiscountValue: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()])),
       orderScope: new FormControl('',Validators.required)
     });
-    this.onPageLoadDisableField(['product1','product2','product3']);
-    this.onCheckBoxChangeDisableField(['product1','product2','product3']);
-    this.handleOtherTransport('transport','otherTransport');
-    this.handleOtherTransport('terms','dueDate');
-    this.handleOtherTransport('tradeDiscount','tradeDiscountValue');
-    this.handleOtherTransport('cashDiscount','cashDiscountValue');
+    this.onInitFunctionCalls();
+  }
+
+  private onInitFunctionCalls() {
+    this.onPageLoadDisableField(['product1', 'product2', 'product3']);
+    this.onCheckBoxChangeDisableField(['product1', 'product2', 'product3']);
+    this.handleOtherTransportAndTerms('transport', 'otherTransport');
+    this.handleOtherTransportAndTerms('terms', 'dueDate');
+    this.handleOtherTransportAndTerms('tradeDiscount', 'tradeDiscountValue');
+    this.handleOtherTransportAndTerms('cashDiscount', 'cashDiscountValue');
     this.handleOrderScope();
+  }
+  private onSubmitResetFields() {
+    this.submitted = false;
+    this.PaddingProd1 = '';
+    this.PaddingProd2 = '';
+    this.PaddingProd3 = '';
+    this.PaddingTd = '';
+    this.PaddingCd = '';
+    this.PaddingGst = '';
+    this.onLoadHideProd1 = 'collapse';
+    this.onLoadHideProd2 = 'collapse';
+    this.onLoadHideProd3 = 'collapse';
+    this.onLoadHideTd = 'collapse';
+    this.onLoadHideCd = 'collapse';
+    this.onLoadHideGst = 'collapse';
+    this.productList = 0;
   }
 
   get orderFormControl() {
@@ -105,6 +125,9 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
       // console.log(this.addOrder.value);
       this.invoiceService.addOrderDetails(this.addOrder.value).subscribe((result => {
         this.addOrder.reset();
+        this.onSubmitResetFields();
+        this.onInitFunctionCalls();
+        
         console.log('Data persisted on server', result);
         this.alert = true;
         this.loadingAlert = false;
@@ -162,7 +185,7 @@ onCheckBoxChangeDisableField(list: any[]) {
   }); 
 }
 }
-handleOtherTransport(sourceControl: string, targetControl: string) {
+handleOtherTransportAndTerms(sourceControl: string, targetControl: string) {
   this.PaddingTd = '0px';
   this.PaddingCd = '0px';
   this.addOrder.get(targetControl).disable();
