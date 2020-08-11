@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class InvoiceFormService {
 
-  URL = "http://localhost:8080/";
+  URL = "https://icc-services-app.herokuapp.com/";
 
   constructor(private _http: HttpClient) { }
 

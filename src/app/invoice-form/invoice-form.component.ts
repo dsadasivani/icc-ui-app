@@ -22,6 +22,7 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   constructor(private customValidator: CustomValidationService, private invoiceService: InvoiceFormService) { }
 
   submitted: boolean = false;
+  hidePriceCalcOnSubmit: boolean = false;
   PaddingProd1: String = '';
   PaddingProd2: String = '';
   PaddingProd3: String = '';
@@ -113,7 +114,7 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   }
 
   createOrder(){
-    
+    this.hidePriceCalcOnSubmit = true;
     this.submitted = true;
     if(this.addOrder.valid){
       window.scroll({ 
@@ -285,6 +286,9 @@ getCalculatedTotal():number {
 
 closeAlert(value){
   value = false;
+  this.connectionAlert = false;
+  this.alert = false;
+  this.hidePriceCalcOnSubmit = false;
 }
 
 }

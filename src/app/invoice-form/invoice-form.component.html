@@ -7,13 +7,13 @@
   </div>
 
   <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Success!</strong> data added successfully..
+    <strong>Success!</strong> Order Placed successfully..
     <button (click)="closeAlert(alert)" type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div *ngIf="connectionAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>ERROR!</strong> unable to connect to database..
+    <strong>ERROR!</strong> unable to connect to Server..
     <button (click)="closeAlert(connectionAlert)" type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -165,7 +165,7 @@
                         <label class="custom-control-label" for="productName1">LEAKSEAL - 1 Ltr x 20 Btls</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts">
+                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts" numbersOnly>
                         <span class="text-danger" *ngIf="(productFormControl('product1').quantity.touched || submitted) && productFormControl('product1').quantity.errors?.required">
                             Please Mention Quantity
                         </span>
@@ -176,7 +176,7 @@
                         <br>   
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="">   
+                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="" numbersOnly>   
                         <span class="text-danger" *ngIf="(productFormControl('product1').unitPrice.touched || submitted) && productFormControl('product1').unitPrice.errors?.required">
                             Please Mention price per carton
                         </span>
@@ -193,7 +193,7 @@
                         <label class="custom-control-label" for="productName2">LEAKSEAL - 5 Ltr x 4 Jars</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts"> 
+                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts" numbersOnly> 
                         <span class="text-danger" *ngIf="(productFormControl('product2').quantity.touched || submitted) && productFormControl('product2').quantity.errors?.required">
                             Please Mention Quantity
                         </span>
@@ -204,7 +204,7 @@
                         <br> 
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="">   
+                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="" numbersOnly>   
                         <span class="text-danger" *ngIf="(productFormControl('product2').unitPrice.touched || submitted) && productFormControl('product2').unitPrice.errors?.required">
                             Please Mention price per carton
                         </span>
@@ -221,7 +221,7 @@
                         <label class="custom-control-label" for="productName3">LEAKSEAL - 100 Ml x 100 Pouches</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts"> 
+                        <input type="text" class="form-control" formControlName="quantity" placeholder="No. of Cts" numbersOnly> 
                         <span class="text-danger" *ngIf="(productFormControl('product3').quantity.touched || submitted) && productFormControl('product3').quantity.errors?.required">
                             Please Mention Quantity
                         </span>
@@ -232,7 +232,7 @@
                         <br> 
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="">
+                        <input type="text" class="form-control" formControlName="unitPrice" placeholder="" numbersOnly>
                         <span class="text-danger" *ngIf="(productFormControl('product3').unitPrice.touched || submitted) && productFormControl('product3').unitPrice.errors?.required">
                             Please Mention price per carton
                         </span>
@@ -264,7 +264,7 @@
                         <label class="custom-control-label" for="tradeDiscount">Trade Discount</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="tradeDiscountValue" placeholder="">   
+                        <input type="text" class="form-control" formControlName="tradeDiscountValue" placeholder="" numbersOnly>   
                         <span class="text-danger" *ngIf="(orderFormControl.tradeDiscountValue.touched || submitted) && orderFormControl.tradeDiscountValue.errors?.required">
                             Disable trade discount checkbox if not needed.
                         </span>
@@ -291,7 +291,7 @@
                         <label class="custom-control-label" for="cashDiscount">Cash Discount</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="cashDiscountValue" placeholder="">  
+                        <input type="text" class="form-control" formControlName="cashDiscountValue" placeholder="" numbersOnly>  
                         <span class="text-danger" *ngIf="(orderFormControl.cashDiscountValue.touched || submitted) && orderFormControl.cashDiscountValue.errors?.required">
                             Disable trade discount checkbox if not needed.
                         </span>
@@ -314,7 +314,7 @@
         &nbsp;
       </form>
     </div>
-    <div class="col-md-4 order-md-2 mb-4">
+    <div *ngIf="!hidePriceCalcOnSubmit" class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-muted">Price Calculation</span>
           <span class="badge badge-secondary badge-pill">{{productList}}</span>
