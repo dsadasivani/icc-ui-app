@@ -93,12 +93,15 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   }
 
   createOrder(){
-    this.loadingAlert = true;
-    // prdt1: FormGroup;
-    // this.prdt1 =  this.addOrder..
-    // console.log(this.addOrder.get('product1')['controls']);
+    
     this.submitted = true;
     if(this.addOrder.valid){
+      window.scroll({ 
+        top: 200, 
+        left: 0, 
+        behavior: 'smooth' 
+      });
+      this.loadingAlert = true;
       // console.log(this.addOrder.value);
       this.invoiceService.addOrderDetails(this.addOrder.value).subscribe((result => {
         this.addOrder.reset();

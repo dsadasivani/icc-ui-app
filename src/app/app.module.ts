@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
+import { NgxLoadingXConfig, POSITION, SPINNER, NgxLoadingXModule  } from 'ngx-loading-x';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,20 @@ import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxLoadingXModule.forRoot({
+      show: false,
+      bgBlur: 2,
+      bgColor: 'rgba(40, 40, 40, 0.5)',
+      bgOpacity: 5,
+  bgLogoUrl: '',
+  bgLogoUrlPosition: POSITION.topLeft,
+  bgLogoUrlSize: 100,
+  spinnerType: SPINNER.xBallSpin,
+  spinnerSize: 80,
+  spinnerColor: '#343a40',
+  spinnerPosition: POSITION.centerCenter,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
