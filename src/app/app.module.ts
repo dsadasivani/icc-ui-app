@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 import { NgxLoadingXConfig, POSITION, SPINNER, NgxLoadingXModule  } from 'ngx-loading-x';
+import { NumbersOnlyDirective } from './directives/numbers-only.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgxLoadingXConfig, POSITION, SPINNER, NgxLoadingXModule  } from 'ngx-lo
     DashboardComponent,
     ProductsComponent,
     HomeComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+    NumbersOnlyDirective
   ],
   imports: [
     BrowserModule,

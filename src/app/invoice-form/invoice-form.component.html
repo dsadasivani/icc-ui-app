@@ -72,7 +72,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">+91-</span>
                 </div>
-              <input type="text" class="form-control" formControlName="phoneNumber" placeholder="">
+              <input type="text" class="form-control" formControlName="phoneNumber" placeholder="" maxlength="10" numbersOnly>
             </div>
               <span class="text-danger" *ngIf="(orderFormControl.phoneNumber.touched || submitted) && orderFormControl.phoneNumber.errors?.required">
                 Phone number is required
