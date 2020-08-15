@@ -114,9 +114,10 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   }
 
   createOrder(){
-    this.hidePriceCalcOnSubmit = true;
+    
     this.submitted = true;
     if(this.addOrder.valid){
+      this.hidePriceCalcOnSubmit = true;
       window.scroll({ 
         top: 200, 
         left: 0, 
