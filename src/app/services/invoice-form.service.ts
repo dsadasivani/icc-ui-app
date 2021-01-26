@@ -1,5 +1,7 @@
+import { Orders } from './../model/orders.model';
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +15,9 @@ export class InvoiceFormService {
 
   addOrderDetails(data){
     return this._http.post(this.URL+"createOrder",data)
+  }
+
+  getOrders(): Observable<Orders[]>{
+    return this._http.get<Orders[]>(this.URL+"getOrders")
   }
 }

@@ -1,4 +1,6 @@
+import { Orders } from './../model/orders.model';
 import { Component, OnInit } from '@angular/core';
+import { InvoiceFormService } from '../services/invoice-form.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
-
+  public collection:any;
+  public ordersList = new Array<Orders>();
+  constructor(private invoiceService: InvoiceFormService) { }
   ngOnInit(): void {
+    this.invoiceService.getOrders().subscribe((result => {
+      this.collection = result;
+      console.log(this.collection);
+
+      this.ordersList = result.map((orders: Orders) => new Orders().deserialize(orders));
+      console.log("Deserialized Object");
+      console.log(this.ordersList);
+    }))
   }
 
 }
