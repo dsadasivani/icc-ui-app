@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { MaterialModule } from "./material/material.module";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 import { NgxLoadingXConfig, POSITION, SPINNER, NgxLoadingXModule  } from 'ngx-loading-x';
 import { NumbersOnlyDirective } from './directives/numbers-only.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NumbersOnlyDirective } from './directives/numbers-only.directive';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MaterialModule,
     NgxLoadingXModule.forRoot({
       show: false,
       bgBlur: 2,
@@ -40,7 +42,8 @@ import { NumbersOnlyDirective } from './directives/numbers-only.directive';
   spinnerSize: 80,
   spinnerColor: '#343a40',
   spinnerPosition: POSITION.centerCenter,
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
