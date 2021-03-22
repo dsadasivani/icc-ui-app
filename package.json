@@ -12,12 +12,10 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.0.4",
-    "@angular/cdk": "~10.2.3-sha-8b4ce730a",
     "@angular/common": "~10.0.4",
     "@angular/compiler": "~10.0.4",
     "@angular/core": "~10.0.4",
     "@angular/forms": "~10.0.4",
-    "@angular/material": "~10.2.3-sha-8b4ce730a",
     "@angular/platform-browser": "~10.0.4",
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
