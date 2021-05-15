@@ -30,3 +30,15 @@
     height: 20px;
   }
 
+  .text-danger {
+    font-size: 0.8em;
+  }
+
+  input.ng-invalid {
+    border-left: 4px solid red;
+  }
+  
+  input.ng-valid {
+    border-left: 4px solid #0079a1;
+  }
+

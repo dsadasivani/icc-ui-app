@@ -18,19 +18,28 @@
     <div class="sidebar-sticky pt-3">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="dashboard"> 
+          <a class="nav-link" 
+          [ngClass]="{ 'active': active === 'dashboard' }"
+          (click)="setActive('dashboard')"
+          routerLink="dashboard"> 
             <span data-feather="home"></span>
             Dashboard <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="add-invoice">
+          <a class="nav-link" 
+          [ngClass]="{ 'active': active === 'add-invoice' }"
+          (click)="setActive('add-invoice')"
+          routerLink="add-invoice">
             <span data-feather="file"></span>
             Orders
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="products">
+          <a class="nav-link" 
+          [ngClass]="{ 'active': active === 'products' }"
+          (click)="setActive('products')"
+          routerLink="products">
             <span data-feather="shopping-cart"></span>
             Products
           </a>

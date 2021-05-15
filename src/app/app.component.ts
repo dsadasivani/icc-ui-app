@@ -7,7 +7,14 @@ import * as Feather from 'feather-icons';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
+
+  active: string = '';
+
   ngAfterViewInit(): void {
     Feather.replace();
+  }
+
+  setActive(active: string): void {
+    this.active = active;
   }
 }
