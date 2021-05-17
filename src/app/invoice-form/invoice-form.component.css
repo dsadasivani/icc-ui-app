@@ -34,6 +34,10 @@
     font-size: 0.8em;
   }
 
+  .gst-text {
+    color: red !important;
+}
+
   input.ng-invalid {
     border-left: 4px solid red;
   }

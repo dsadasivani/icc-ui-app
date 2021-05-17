@@ -367,12 +367,12 @@
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between bg-light" [style.padding]="PaddingGst">
-            <div class="text-danger" [class]="onLoadHideGst" id="orderScope">
+            <div class="text-warning gst-text" [class]="onLoadHideGst" id="orderScope">
               <h6 class="my-0">GST</h6>
               <small>IGST 18%</small>
             </div>
             <div id="orderScope" [class]="onLoadHideGst">
-                <span class="text-danger">{{getGstAmt() | currency:'INR':'symbol' : '1.0-0'}}</span>
+                <span class="text-warning gst-text">{{getGstAmt() | currency:'INR':'symbol' : '1.0-0'}}</span>
             </div>        
           </li>
           <li class="list-group-item d-flex justify-content-between">
