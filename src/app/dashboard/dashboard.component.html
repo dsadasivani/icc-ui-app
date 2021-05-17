@@ -14,7 +14,7 @@
     <div class="pl-2 pr-2">
     <h2>Orders</h2>
     </div>
-    <div *ngIf= "!loadingAlert && ordersList?.length ===0" 
+    <div *ngIf= "!loadingAlert && ordersListBatch?.length ===0" 
     class="alert alert-warning alert-dismissible fade show {{alertStr}}"
     role="alert">
       <strong>Oops!&nbsp;</strong>{{displayMessage}}
@@ -32,12 +32,12 @@
             <th>Order ID</th>
             <th>Address Details</th>
             <th>Company Name</th>
-            <th>Order Sent Date</th>
+            <th class="hover" (click)="sortByField('orderSentDate')">Order Sent Date <i data-feather='chevron-down'></i></th>
             <th>Phone No.</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let order of ordersList">
+          <tr *ngFor="let order of ordersListBatch | sort: fieldNameToSort:sortInReverse">
             <td>{{order.orderId}}</td>
             <td>{{order.address}}, {{order.address2}}</td>
             <td>{{order.companyName}}</td>
@@ -54,6 +54,6 @@
       &nbsp;
       <div class="spinner-grow" role="status"></div>
     </div>
+    &nbsp;&nbsp;<button class="btn btn-light loadMore" [disabled]="noMoreData" (click)="loadMore()">Load More</button>
     
-    
-    
+    <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>

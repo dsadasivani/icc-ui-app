@@ -12,6 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 import { NgxLoadingXConfig, POSITION, SPINNER, NgxLoadingXModule  } from 'ngx-loading-x';
 import { NumbersOnlyDirective } from './directives/numbers-only.directive';
+import { SortPipe } from './pipes/sort.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { NumbersOnlyDirective } from './directives/numbers-only.directive';
     ProductsComponent,
     HomeComponent,
     ScrollToTopComponent,
-    NumbersOnlyDirective
+    NumbersOnlyDirective,
+    SortPipe,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,8 @@ import { NumbersOnlyDirective } from './directives/numbers-only.directive';
   spinnerSize: 80,
   spinnerColor: '#343a40',
   spinnerPosition: POSITION.centerCenter,
-    })
+    }),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
