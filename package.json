@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
+    "start": "http-server-spa dist/icc-ui-app index.html $PORT",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
