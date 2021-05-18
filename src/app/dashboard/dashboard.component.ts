@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   open() {
     const modalRef = this.modalService.open(OrderDetailsComponent);
-    modalRef.componentInstance.name = this.ordersList[0];
+    modalRef.componentInstance.name = this.ordersListBatch[0];
   }
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
       // this.ordersListBatch = this.ordersList.splice(0,5);
       this.ordersListBatch = this.getOrdersBatch();
       console.log("Deserialized Object");
-      console.log(this.ordersList);
+      console.log(this.ordersListBatch);
       this.loadingAlert = false;
       this.displayMessage = 'No records to display..';
       this.alertStr = 'alert-warning';
