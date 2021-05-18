@@ -11,9 +11,6 @@ export class InvoiceFormService {
 
   baseUrl = environment.baseUrl;
 
-  // URL = "https://icc-services-app.herokuapp.com/";
-    //  URL = "http://localhost:8080/";
-
   constructor(private _http: HttpClient) { }
 
   addOrderDetails(data){
