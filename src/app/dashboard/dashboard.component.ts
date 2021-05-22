@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   noMoreData: boolean = false;
   fieldNameToSort: string = undefined;
   sortInReverse: boolean = true;
+  filterText: string;
 
   // ngAfterViewInit(): void {
   //   Feather.replace();

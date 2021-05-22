@@ -7,7 +7,7 @@ import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 import { NgxLoadingXConfig, POSITION, SPINNER, NgxLoadingXModule  } from 'ngx-loading-x';
@@ -15,6 +15,7 @@ import { NumbersOnlyDirective } from './directives/numbers-only.directive';
 import { SortPipe } from './pipes/sort.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,12 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     ScrollToTopComponent,
     NumbersOnlyDirective,
     SortPipe,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
