@@ -5,3 +5,7 @@
 th.hover {
     cursor: pointer;
 }
+
+.btn-link {
+    padding: 0;
+}

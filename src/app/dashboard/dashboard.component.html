@@ -38,7 +38,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let order of ordersListBatch | sort: fieldNameToSort:sortInReverse">
-            <td>{{order.orderId}}</td>
+            <td>
+              <button class="btn btn-link" (click)="open(order)">{{order.orderId}}</button>
+            </td>
             <td>{{order.address}}, {{order.address2}}</td>
             <td>{{order.companyName}}</td>
             <td>{{order.orderSentDate | date: 'MMM d, y, h:mm:ss a'}}</td>
@@ -55,5 +57,3 @@
       <div class="spinner-grow" role="status"></div>
     </div>
     &nbsp;&nbsp;<button class="btn btn-light loadMore" [disabled]="noMoreData" (click)="loadMore()">Load More</button>
-    
-    <button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>

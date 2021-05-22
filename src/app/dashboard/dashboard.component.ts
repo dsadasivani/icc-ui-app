@@ -27,9 +27,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(private invoiceService: InvoiceFormService, private modalService: NgbModal) { }
 
-  open() {
-    const modalRef = this.modalService.open(OrderDetailsComponent);
-    modalRef.componentInstance.name = this.ordersListBatch[0];
+  open(data: Orders) {
+    const modalRef = this.modalService.open(OrderDetailsComponent, { size: 'lg', scrollable: true });
+    modalRef.componentInstance.orderData = data;
   }
 
   ngOnInit(): void {

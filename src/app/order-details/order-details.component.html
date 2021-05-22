@@ -1,11 +1,80 @@
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
+  <h4 class="modal-title">Order details</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <p>Hello, {{name | json}}!</p>
+  <table class="table table-borderless">
+    <tbody>
+      <tr class="d-flex">
+        <th class="col-3">Sales Person</th>
+        <td class="col-9">{{orderData.salesPersonName}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Company Name</th>
+        <td class="col-9">{{orderData.companyName}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Order Sent Date</th>
+        <td class="col-9">{{orderData.orderSentDate | date:'medium'}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Order Sent Via</th>
+        <td class="col-9">{{orderData.orderSentVia}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">FOB Point</th>
+        <td class="col-9">{{orderData.fobPoint}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Terms</th>
+        <td class="col-9">{{getTerms()}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Contact No.</th>
+        <td class="col-9">+91-{{orderData.phoneNumber}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Address</th>
+        <td class="col-9">{{orderData.address}}<br>{{orderData.address2}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">GSTIN</th>
+        <td class="col-9">{{orderData.gstin}}</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Trade Discount</th>
+        <td class="col-9">{{orderData.tradeDiscountValue}}%</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Cash Discount</th>
+        <td class="col-9">{{orderData.cashDiscountValue}}%</td>
+      </tr>
+      <tr class="d-flex">
+        <th class="col-3">Order Scope</th>
+        <td class="col-9">{{getOrderScope()}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>HSN Code</th>
+      <th>Product Name</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of orderData.product">
+      <td>{{product.hsnCode}}</td>
+      <td>{{product.productDesc}}</td>
+      <td>{{product.quantity}} units</td>
+      <td>{{product.unitPrice | currency:'INR'}}</td>
+    </tr>
+  </tbody>
+  </table>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
