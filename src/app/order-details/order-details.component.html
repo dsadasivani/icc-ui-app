@@ -75,6 +75,12 @@
     </tr>
   </tbody>
   </table>
+  <button type="button" class="btn btn-primary btn-sm" (click)="openDoc1(orderData.orderId)">
+    View
+</button>
+<button type="button" class="btn btn-success btn-sm" (click)="downloadPdf1(orderData.orderId)">
+    Download
+</button>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
