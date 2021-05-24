@@ -4,6 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { InvoiceFormService } from '../services/invoice-form.service';
 import * as Feather from 'feather-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InvoiceService } from '../services/invoice.service';
+
+declare var require: any
+const FileSaver = require('file-saver');
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +30,7 @@ export class DashboardComponent implements OnInit {
   //   Feather.replace();
   // }
 
-  constructor(private invoiceService: InvoiceFormService, private modalService: NgbModal) { }
+  constructor(private invoiceService: InvoiceFormService, private modalService: NgbModal,  private invoiceContentService: InvoiceService) { }
 
   open(data: Orders) {
     const modalRef = this.modalService.open(OrderDetailsComponent, { size: 'lg', scrollable: true });
@@ -42,6 +46,9 @@ export class DashboardComponent implements OnInit {
       this.ordersList = result.map((orders: Orders) => new Orders().deserialize(orders));
       // this.ordersListBatch = this.ordersList.splice(0,5);
       this.ordersListBatch = this.getOrdersBatch();
+      if(this.ordersList.length == 0) { 
+        this.noMoreData = true 
+      } 
       console.log("Deserialized Object");
       console.log(this.ordersListBatch);
       this.loadingAlert = false;
@@ -52,6 +59,7 @@ export class DashboardComponent implements OnInit {
       this.loadingAlert = false;
       this.displayMessage = 'Error while fetching records from database. Please check connection..';
       this.alertStr = 'alert-danger';
+      this.noMoreData = true;
     }))
   }
 
@@ -75,8 +83,19 @@ export class DashboardComponent implements OnInit {
     this.sortInReverse = !this.sortInReverse;
   }
 
-  // setAlert(alertStr: string): void {
-  //   this.alertStr = alertStr;
-  // }
+  createFileURL(result: Blob): string{
+    var newBlob = new Blob([result], { type: "application/pdf" });
+      return window.URL.createObjectURL(newBlob);
+  }
+  viewInvoice(orderId: number){
+    this.invoiceContentService.getFileContent(orderId).subscribe((result => {
+      window.open(this.createFileURL(result), 'Invoice', "width=1100,height=600,top=100,left=100");
+    }));
+  }
+  downloadInvoice(orderId: number){
+    this.invoiceContentService.getFileContent(orderId).subscribe((result => {
+      FileSaver.saveAs(this.createFileURL(result), "Invoice");
+    }));
+  }
   
 }

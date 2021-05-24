@@ -33,12 +33,12 @@ export class OrderDetailsComponent implements OnInit {
     var newBlob = new Blob([result], { type: "application/pdf" });
       return window.URL.createObjectURL(newBlob);
   }
-  openDoc1(orderId: number){
+  viewInvoice(orderId: number){
     this.invoiceService.getFileContent(orderId).subscribe((result => {
       window.open(this.createFileURL(result), 'Invoice', "width=1100,height=600,top=100,left=100");
     }));
   }
-  downloadPdf1(orderId: number){
+  downloadInvoice(orderId: number){
     this.invoiceService.getFileContent(orderId).subscribe((result => {
       FileSaver.saveAs(this.createFileURL(result), "Invoice");
     }));

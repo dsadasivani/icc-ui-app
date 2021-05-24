@@ -45,6 +45,7 @@ role="alert">
         <th>Company Name</th>
         <th class="hover" (click)="sortByField('orderSentDate')">Order Sent Date <i data-feather='chevron-down'></i></th>
         <th>Phone No.</th>
+        <th>View/Download Invoice</th>
       </tr>
     </thead>
     <tbody>
@@ -56,6 +57,12 @@ role="alert">
         <td>{{order.companyName}}</td>
         <td>{{order.orderSentDate | date: 'MMM d, y, h:mm:ss a'}}</td>
         <td>+91-{{order.phoneNumber}}</td>
+        <td>&nbsp;&nbsp;
+          <button type="button" class="btn btn-link" (click)="viewInvoice(order.orderId)"><i class="bi bi-file-earmark-pdf"></i></button>
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-link" (click)="downloadInvoice(order.orderId)"><i class="bi bi-download"></i></button>
+
+        </td>
       </tr>
     </tbody>
   </table>
@@ -67,4 +74,4 @@ role="alert">
   &nbsp;
   <div class="spinner-grow" role="status"></div>
 </div>
-&nbsp;&nbsp;<button class="btn btn-light loadMore" [disabled]="noMoreData" (click)="loadMore()">Load More</button>
+&nbsp;&nbsp;<button class="btn btn-light loadMore" [disabled]="noMoreData" (click)="loadMore()"><i class="bi bi-caret-down-fill"></i> <b> Load More </b> <i class="bi bi-three-dots"></i></button>
