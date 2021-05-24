@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   public ordersList = new Array<Orders>();
   public ordersListBatch = new Array<Orders>();
   loadingAlert:boolean = true;
-  noMoreData: boolean = false;
+  noMoreData: boolean = true;
   fieldNameToSort: string = undefined;
   sortInReverse: boolean = true;
   filterText: string;
@@ -48,7 +48,9 @@ export class DashboardComponent implements OnInit {
       this.ordersListBatch = this.getOrdersBatch();
       if(this.ordersList.length == 0) { 
         this.noMoreData = true 
-      } 
+      }else{
+        this.noMoreData = false 
+      }
       console.log("Deserialized Object");
       console.log(this.ordersListBatch);
       this.loadingAlert = false;
