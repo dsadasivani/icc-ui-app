@@ -16,6 +16,7 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   alert:boolean = false;
   connectionAlert:boolean = false;
   loadingAlert:boolean = false;
+  gstInput = '';
 
   ngAfterViewInit(): void {
     Feather.replace();

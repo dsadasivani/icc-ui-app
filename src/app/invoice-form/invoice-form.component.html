@@ -57,7 +57,8 @@
         <div class="row">
             <div class="col-md-6 mb-3">
               <label for="gstin">GSTIN Number</label>
-              <input type="text" class="form-control" formControlName="gstin" placeholder="">
+              <input type="text" class="form-control" formControlName="gstin" placeholder="" [ngModel]="gstInput" 
+              (ngModelChange)="gstInput = $event.toUpperCase()">
               <small class="text-muted"><span data-feather="info"></span>Legal GSTIN to be provided</small><br>
               <span class="text-danger" *ngIf="(orderFormControl.gstin.touched || submitted) && orderFormControl.gstin.errors?.required">
                 GSTIN number is required
