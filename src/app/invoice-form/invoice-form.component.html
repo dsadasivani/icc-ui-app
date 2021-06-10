@@ -126,6 +126,23 @@
           </div>
         <div class="row">
           <div class="col-md-4 mb-2">
+            <label for="invoiceNumber">Invoice No.</label>
+            <input type="number" class="form-control" formControlName="invoiceNumber" placeholder="">
+          </div>
+          <div class="col-md-4 mb-2">
+            <label for="invoiceDate">Invoice Date</label>
+            <div class="input-group">
+            <input class="form-control" formControlName="invoiceDate" placeholder="yyyy-mm-dd"
+            name="dp" [(ngModel)]="invoiceDate" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+            <small class="text-muted"><span data-feather="info"></span>Leave blank for current date</small><br>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-2">
             <label for="terms">Monetary Terms</label>
             <select class="form-control custom-select d-block w-100" formControlName="terms">
               <option value="">Choose...</option>

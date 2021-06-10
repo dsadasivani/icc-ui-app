@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@ang
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { CustomValidationService } from '../services/custom-validation.service';
 import { InvoiceFormService } from '../services/invoice-form.service';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import * as Feather from 'feather-icons';
 
 @Component({
@@ -11,6 +12,7 @@ import * as Feather from 'feather-icons';
 })
 export class InvoiceFormComponent implements OnInit, AfterViewInit {
 
+  invoiceDate: NgbDateStruct;
   alert:boolean = false;
   connectionAlert:boolean = false;
   loadingAlert:boolean = false;
@@ -39,6 +41,7 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   onLoadHideGst: String = 'collapse multi-collapse';
   
   productList: number = 0;
+  readonly DELIMITER = '-';
   
 
   ngOnInit(): void {
@@ -74,7 +77,9 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
       tradeDiscountValue: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()])),
       cashDiscount: new FormControl(''),
       cashDiscountValue: new FormControl('',Validators.compose([Validators.required, this.customValidator.numberValidator()])),
-      orderScope: new FormControl('',Validators.required)
+      orderScope: new FormControl('',Validators.required),
+      invoiceNumber: new FormControl('',Validators.required),
+      invoiceDate: new FormControl('')
     });
     this.onInitFunctionCalls();
   }
@@ -113,10 +118,14 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
     return this.addOrder.get(value)['controls'];
   }
 
+  jsonToString(date: NgbDateStruct | null): string | null {
+    return date ? date.year + this.DELIMITER + (date.month.toString.length==1 ? '0'+date.month: date.month) + this.DELIMITER + (date.day.toString.length==1 ? '0'+date.day: date.day) : null;
+  }
+
   createOrder(){
-    
     this.submitted = true;
     if(this.addOrder.valid){
+      this.addOrder.patchValue({invoiceDate: this.jsonToString(this.addOrder.get('invoiceDate').value)})
       this.hidePriceCalcOnSubmit = true;
       window.scroll({ 
         top: 200, 
@@ -124,7 +133,6 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
         behavior: 'smooth' 
       });
       this.loadingAlert = true;
-      // console.log(this.addOrder.value);
       this.invoiceService.addOrderDetails(this.addOrder.value).subscribe((result => {
         this.addOrder.reset();
         this.onSubmitResetFields();
