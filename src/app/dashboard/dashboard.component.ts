@@ -5,7 +5,7 @@ import { InvoiceFormService } from '../services/invoice-form.service';
 import * as Feather from 'feather-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceService } from '../services/invoice.service';
-import * as constants from '../constants';
+import * as constants from '../Constants';
 
 declare var require: any
 const FileSaver = require('file-saver');
