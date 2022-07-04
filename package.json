@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "http-server-spa dist/icc-ui-app index.html $PORT",
-    "build": "ng build && npm install -g http-server-spa",
+    "build": "npm install -g http-server-spa && ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
