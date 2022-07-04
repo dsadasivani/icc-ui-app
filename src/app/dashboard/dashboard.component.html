@@ -25,7 +25,7 @@
   />
 </div>
 </div>
-<div *ngIf= "!loadingAlert && ordersListBatch?.length ===0" 
+<div *ngIf= "!loadingAlert && ordersList?.length ===0" 
 class="alert alert-warning alert-dismissible fade show {{alertStr}}"
 role="alert">
   <strong>Oops!&nbsp;</strong>{{displayMessage}}
@@ -49,7 +49,7 @@ role="alert">
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let order of ordersListBatch | filter: filterText: 'orderId' | sort: fieldNameToSort:sortInReverse">
+      <tr *ngFor="let order of ordersList | filter: filterText: 'orderId' | sort: fieldNameToSort:sortInReverse">
         <td>
           <button class="btn btn-link" (click)="open(order)">{{order.orderId}}</button>
         </td>
