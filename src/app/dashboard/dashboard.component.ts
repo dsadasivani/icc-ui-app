@@ -5,6 +5,7 @@ import { InvoiceFormService } from '../services/invoice-form.service';
 import * as Feather from 'feather-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceService } from '../services/invoice.service';
+import * as constants from '../constants';
 
 declare var require: any
 const FileSaver = require('file-saver');
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit {
   fieldNameToSort: string = undefined;
   sortInReverse: boolean = true;
   filterText: string;
+  offset: number;
 
   // ngAfterViewInit(): void {
   //   Feather.replace();
@@ -38,21 +40,18 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.offset = 0;
     Feather.replace();
-    this.invoiceService.getOrders().subscribe((result => {
+    this.invoiceService.getOrders(this.offset).subscribe((result => {
       this.collection = result;
       console.log(this.collection);
 
       this.ordersList = result.map((orders: Orders) => new Orders().deserialize(orders));
-      // this.ordersListBatch = this.ordersList.splice(0,5);
-      this.ordersListBatch = this.getOrdersBatch();
-      if(this.ordersList.length == 0) { 
+      if(this.ordersList.length < constants.NO_OF_RECORDS_PER_PAGE) { 
         this.noMoreData = true 
       }else{
         this.noMoreData = false 
       }
-      console.log("Deserialized Object");
-      console.log(this.ordersListBatch);
       this.loadingAlert = false;
       this.displayMessage = 'No records to display..';
       this.alertStr = 'alert-warning';
@@ -65,19 +64,29 @@ export class DashboardComponent implements OnInit {
     }))
   }
 
-  public getOrdersBatch(): Array<Orders> {
-    if(this.ordersList.length <= 10) {
-      return this.ordersList.splice(0,this.ordersList.length);
-    }
-    return this.ordersList.splice(0,10);
-  }
+  // public getOrdersBatch(): Array<Orders> {
+  //   if(this.ordersList.length <= 10) {
+  //     return this.ordersList.splice(0,this.ordersList.length);
+  //   }
+  //   return this.ordersList.splice(0,10);
+  // }
 
   public loadMore(): void {
-      const data = this.getOrdersBatch();
-      if (data.length == 0) {
-        this.noMoreData = true;
-      }
-      this.ordersListBatch.push(...data);
+      // // const data = this.getOrdersBatch();
+      // if (data.length == 0) {
+      //   this.noMoreData = true;
+      // }
+      // this.ordersListBatch.push(...data);
+      this.offset++;
+      this.invoiceService.getOrders(this.offset).subscribe((result => {
+        var data = result.map((orders: Orders) => new Orders().deserialize(orders));
+        this.ordersList.push(...data);
+        if(data.length == 0 || data.length < constants.NO_OF_RECORDS_PER_PAGE) {
+          this.noMoreData = true;
+        } else {
+          this.noMoreData = false 
+        }
+      }));
   }
 
   sortByField(fieldName: string): void {
