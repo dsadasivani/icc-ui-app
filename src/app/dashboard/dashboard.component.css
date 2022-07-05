@@ -1,26 +1,26 @@
 .load {
-    padding-left: 40%;
+  padding-left: 40%;
 }
 
 th.hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btn-link {
-    padding: 0;
+  padding: 0;
 }
 
 .bi-file-earmark-pdf {
-    font-size: 1.5rem; 
-    color: red;
+  font-size: 1.5rem;
+  color: red;
 }
 
 .bi-download {
-    font-size: 1.5rem; 
-    color: blue;
+  font-size: 1.5rem;
+  color: blue;
 }
 
 .table thead th {
-    vertical-align: top;
-    width: 1px;
+  vertical-align: top;
+  width: 1px;
 }

@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomValidationService {
-
-
   alphaNumericValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
@@ -18,7 +16,6 @@ export class CustomValidationService {
     };
   }
 
-  
   numberValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
@@ -29,5 +26,4 @@ export class CustomValidationService {
       return valid ? null : { invalidNumber: true };
     };
   }
-
 }
