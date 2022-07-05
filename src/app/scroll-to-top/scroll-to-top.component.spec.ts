@@ -8,9 +8,8 @@ describe('ScrollToTopComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScrollToTopComponent ]
-    })
-    .compileComponents();
+      declarations: [ScrollToTopComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

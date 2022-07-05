@@ -1,34 +1,45 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pl-2 pr-2 pt-3 pb-2 mb-3 border-bottom">
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pl-2 pr-2 pt-3 pb-2 mb-3 border-bottom"
+>
   <h1 class="h2">Dashboard</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
-      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary">
+        Share
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-secondary">
+        Export
+      </button>
     </div>
-    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-secondary dropdown-toggle"
+    >
       <span data-feather="calendar"></span>
       This week
     </button>
   </div>
 </div>
 <div class="pl-2 pr-2">
-<h2>Orders</h2>
-<div>
-  <input
-    type="text"
-    name="filterBy"
-    id="filterBy"
-    class="form-control"
-    autofocus
-    placeholder="Enter Order ID to filter..."
-    [(ngModel)]="filterText"
-  />
+  <h2>Orders</h2>
+  <div>
+    <input
+      type="text"
+      name="filterBy"
+      id="filterBy"
+      class="form-control"
+      autofocus
+      placeholder="Enter Order ID to filter..."
+      [(ngModel)]="filterText"
+    />
+  </div>
 </div>
-</div>
-<div *ngIf= "!loadingAlert && ordersList?.length ===0" 
-class="alert alert-warning alert-dismissible fade show {{alertStr}}"
-role="alert">
-  <strong>Oops!&nbsp;</strong>{{displayMessage}}
+<div
+  *ngIf="!loadingAlert && ordersListBatch?.length === 0"
+  class="alert alert-warning alert-dismissible fade show {{ alertStr }}"
+  role="alert"
+>
+  <strong>Oops!&nbsp;</strong>{{ displayMessage }}
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -36,42 +47,71 @@ role="alert">
 
 <div class="table-responsive pl-2 pr-2">
   <!-- <div class="container" NgxLoadingXBlur [show]="loadingAlert"> -->
-    
+
   <table class="table table-striped table-sm">
     <thead>
       <tr>
         <th>Order ID</th>
         <th>Address Details</th>
         <th>Company Name</th>
-        <th class="hover" (click)="sortByField('orderSentDate')">Order Sent Date <i data-feather='chevron-down'></i></th>
+        <th class="hover" (click)="sortByField('orderSentDate')">
+          Order Sent Date <i data-feather="chevron-down"></i>
+        </th>
         <th>Phone No.</th>
         <th>View/Download Invoice</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let order of ordersList | filter: filterText: 'orderId' | sort: fieldNameToSort:sortInReverse">
+      <tr
+        *ngFor="
+          let order of ordersListBatch
+            | filter: filterText:'orderId'
+            | sort: fieldNameToSort:sortInReverse
+        "
+      >
         <td>
-          <button class="btn btn-link" (click)="open(order)">{{order.orderId}}</button>
+          <button class="btn btn-link" (click)="open(order)">
+            {{ order.orderId }}
+          </button>
         </td>
-        <td>{{order.address}}, {{order.address2}}</td>
-        <td>{{order.companyName}}</td>
-        <td>{{order.orderSentDate | date: 'MMM d, y, h:mm:ss a'}}</td>
-        <td>+91-{{order.phoneNumber}}</td>
-        <td>&nbsp;&nbsp;
-          <button type="button" class="btn btn-link" (click)="viewInvoice(order.orderId)"><i class="bi bi-file-earmark-pdf"></i></button>
+        <td>{{ order.address }}, {{ order.address2 }}</td>
+        <td>{{ order.companyName }}</td>
+        <td>{{ order.orderSentDate | date: "MMM d, y, h:mm:ss a" }}</td>
+        <td>+91-{{ order.phoneNumber }}</td>
+        <td>
           &nbsp;&nbsp;
-          <button type="button" class="btn btn-link" (click)="downloadInvoice(order.orderId)"><i class="bi bi-download"></i></button>
-
+          <button
+            type="button"
+            class="btn btn-link"
+            (click)="viewInvoice(order.orderId)"
+          >
+            <i class="bi bi-file-earmark-pdf"></i>
+          </button>
+          &nbsp;&nbsp;
+          <button
+            type="button"
+            class="btn btn-link"
+            (click)="downloadInvoice(order.orderId)"
+          >
+            <i class="bi bi-download"></i>
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
-<!-- </div>
+  <!-- </div>
 <ngx-loading-x [show]="loadingAlert"></ngx-loading-x> -->
 </div>
-<div *ngIf=loadingAlert class="d-flex align-items-center load">
+<div *ngIf="loadingAlert" class="d-flex align-items-center load">
   <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
   &nbsp;
   <div class="spinner-grow" role="status"></div>
 </div>
-&nbsp;&nbsp;<button class="btn btn-light loadMore" [disabled]="noMoreData" (click)="loadMore()"><i class="bi bi-caret-down-fill"></i> <b> Load More </b> <i class="bi bi-three-dots"></i></button>
+&nbsp;&nbsp;<button
+  class="btn btn-light loadMore"
+  [disabled]="noMoreData"
+  (click)="loadMore()"
+>
+  <i class="bi bi-caret-down-fill"></i> <b> Load More </b>
+  <i class="bi bi-three-dots"></i>
+</button>

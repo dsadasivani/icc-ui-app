@@ -1,1 +1,1 @@
-export const NO_OF_RECORDS_PER_PAGE = 15;
+export const NO_OF_RECORDS_PER_PAGE = 50;

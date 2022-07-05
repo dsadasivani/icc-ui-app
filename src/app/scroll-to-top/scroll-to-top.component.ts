@@ -4,11 +4,10 @@ import * as Feather from 'feather-icons';
 @Component({
   selector: 'app-scroll-to-top',
   templateUrl: './scroll-to-top.component.html',
-  styleUrls: ['./scroll-to-top.component.css']
+  styleUrls: ['./scroll-to-top.component.css'],
 })
 export class ScrollToTopComponent implements AfterViewInit {
-
-  constructor() { }
+  constructor() {}
   ngAfterViewInit(): void {
     Feather.replace();
   }
@@ -18,12 +17,15 @@ export class ScrollToTopComponent implements AfterViewInit {
 
   @HostListener('window:scroll')
   checkScroll() {
-      
     // window의 scroll top
     // Both window.pageYOffset and document.documentElement.scrollTop returns the same result in all the cases. window.pageYOffset is not supported below IE 9.
 
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
     if (scrollPosition >= this.topPosToStartShowing) {
       this.isShow = true;
     } else {
@@ -33,10 +35,10 @@ export class ScrollToTopComponent implements AfterViewInit {
 
   // TODO: Cross browsing
   gotoTop() {
-    window.scroll({ 
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
     });
   }
 }
