@@ -10,7 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
-import { NgxLoadingXConfig, POSITION, SPINNER, NgxLoadingXModule  } from 'ngx-loading-x';
+import {
+  NgxLoadingXConfig,
+  POSITION,
+  SPINNER,
+  NgxLoadingXModule,
+} from 'ngx-loading-x';
 import { NumbersOnlyDirective } from './directives/numbers-only.directive';
 import { SortPipe } from './pipes/sort.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -28,7 +33,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     NumbersOnlyDirective,
     SortPipe,
     OrderDetailsComponent,
-    FilterPipe
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -41,17 +46,17 @@ import { FilterPipe } from './pipes/filter.pipe';
       bgBlur: 2,
       bgColor: 'rgba(40, 40, 40, 0.5)',
       bgOpacity: 5,
-  bgLogoUrl: '',
-  bgLogoUrlPosition: POSITION.topLeft,
-  bgLogoUrlSize: 100,
-  spinnerType: SPINNER.xBallSpin,
-  spinnerSize: 80,
-  spinnerColor: '#343a40',
-  spinnerPosition: POSITION.centerCenter,
+      bgLogoUrl: '',
+      bgLogoUrlPosition: POSITION.topLeft,
+      bgLogoUrlSize: 100,
+      spinnerType: SPINNER.xBallSpin,
+      spinnerSize: 80,
+      spinnerColor: '#343a40',
+      spinnerPosition: POSITION.centerCenter,
     }),
-    NgbModule
+    NgbModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
