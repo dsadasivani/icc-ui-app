@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { CustomValidationService } from '../services/custom-validation.service';
 import { InvoiceFormService } from '../services/invoice-form.service';
+import { HealthCheckService } from '../services/health-check.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as Feather from 'feather-icons';
 
@@ -34,7 +35,8 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
 
   constructor(
     private customValidator: CustomValidationService,
-    private invoiceService: InvoiceFormService
+    private invoiceService: InvoiceFormService,
+    private healthCheckService: HealthCheckService
   ) {}
 
   submitted: boolean = false;
@@ -58,6 +60,11 @@ export class InvoiceFormComponent implements OnInit, AfterViewInit {
   readonly DELIMITER = '-';
 
   ngOnInit(): void {
+    this.healthCheckService.getHealthStatus().subscribe(
+      (result) => console.log('Connection successful', result),
+      (error) => console.log('Error connecting server', error)
+    );
+
     this.addOrder = new FormGroup({
       companyName: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
