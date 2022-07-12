@@ -6,6 +6,7 @@ import * as Feather from 'feather-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceService } from '../services/invoice.service';
 import * as constants from '../Constants';
+import { HealthCheckService } from '../services/health-check.service';
 
 declare var require: any;
 const FileSaver = require('file-saver');
@@ -35,7 +36,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private invoiceService: InvoiceFormService,
     private modalService: NgbModal,
-    private invoiceContentService: InvoiceService
+    private invoiceContentService: InvoiceService,
+    private healthCheckService: HealthCheckService
   ) {}
 
   open(data: Orders) {
@@ -47,6 +49,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.healthCheckService.getHealthStatus().subscribe(
+      (result) => console.log('Connection successful', result),
+      (error) => console.log('Error connecting server', error)
+    );
     this.offset = 0;
     Feather.replace();
     this.invoiceService
